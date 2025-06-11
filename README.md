@@ -59,11 +59,7 @@ Prompt 2: "A child reading a book under a tree" → slide 2
 ...
 → Slideshow.mp4 (9:16 vertical, with transitions and soundtrack)
 
-yaml
-Копировать
-Редактировать
 
----
 
 ## 📬 Contact
 
