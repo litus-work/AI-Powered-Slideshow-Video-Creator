@@ -1,0 +1,481 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        0
+      ],
+      "id": "b2bfd67e-2ee0-42d9-ab9c-31e666c69498",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "You are a professional scriptwriter creating viral content for TikTok and Instagram Reels. Your task is to write a captivating, emotional, and wow-effect script in Russian, approximately 1500 characters long, for a video on the topic “The Mystery of Atlantis”.\n\nThe core idea is based on the chapter from the book \"100 Great Mysteries of History\", but you may enrich it with facts from other sources: archaeology, mythology, rare theories. Do not use a dry, encyclopedic tone — the text must grip the audience from the very first line, sound like a movie trailer, spark imagination, and evoke curiosity.\n\nStructure:\n\nA gripping hook — a question or intrigue (1–2 sentences)\n\nA brief retelling of the Atlantis legend — Plato, the flood, the city’s layout\n\nSurprising facts and lesser-known theories (e.g. Bimini, Richat Structure, DNA links)\n\nA mystical finale — a question or challenge to the viewer\n\nNo headings — just a single, continuous text block\n\nImportant: The script should sound like a voiceover. Use a cinematic style, but keep it borderline believable. Example: “They didn’t vanish… they hid.”\n\nWrite in Russian. Text length — 1400–1600 characters.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        460,
+        0
+      ],
+      "id": "2932fe9e-60d0-4cff-bf7b-dfd7d98cd649",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        600,
+        260
+      ],
+      "id": "a6b8cbb3-5822-401e-8e7f-6171b11ee1b9",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "h7c7YzIVRuzwmnJS",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        460,
+        260
+      ],
+      "id": "93c5b2bf-bfbd-42b3-bf6c-55bb80381eb4",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "cV569OCw3igJQwuR",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1420,
+        0
+      ],
+      "id": "13db01af-41da-47d8-a1bd-17d6bd108280",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        20
+      ],
+      "id": "9e7ca64a-4aa3-4d8c-9f32-5462b4616944"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2240,
+        20
+      ],
+      "id": "3929c24d-8acc-4a0d-8990-247797161eba",
+      "name": "Wait",
+      "webhookId": "46682485-959b-4e86-8f0c-63e3ebb05cf4"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        860,
+        220
+      ],
+      "id": "6639176e-a605-46ae-9c2e-a0363c43608c",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "cV569OCw3igJQwuR",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1qcC1_UWaWnF9cUCJEEO__-M7gOQJjMihYEedOte2DRo",
+          "mode": "list",
+          "cachedResultName": "video_creator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qcC1_UWaWnF9cUCJEEO__-M7gOQJjMihYEedOte2DRo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Лист1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qcC1_UWaWnF9cUCJEEO__-M7gOQJjMihYEedOte2DRo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "output": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "output"
+          ],
+          "schema": [
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        840,
+        -200
+      ],
+      "id": "e688f00b-13b2-4efd-8961-3b7002cb13a6",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "OjHU6gvYuJ8p4pWU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Authorization\": \"Bearer hf_...\",\n  \"Accept\": \"application/json\",\n  \"Content-Type\": \"application/json\"\n}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "inputs",
+              "value": "={{ $json.text_promt }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "d0cbc13d-ceaa-4bd8-9e47-ecff71615c9d",
+      "name": "Call hugginface inference api",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1640,
+        20
+      ],
+      "notesInFlow": true,
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "61CZ1hBKna8UBzkW",
+          "name": "Header Auth account 4"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "notes": " "
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"formSubmittedText\": \"Flux API failed. It does this ~10% of the time. Refresh and try again.\"\n}",
+        "options": {}
+      },
+      "id": "edffa78e-8a18-48ab-93e5-c4db74b92d51",
+      "name": "Respond with error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        1880,
+        40
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=C:\\Users\\Alterprofi\\Desktop\\N8n\\images\\atlantis_{{ DateTime.now().toFormat(\"yyyy_MM_dd_HH_mm_ss\") }}.png",
+        "options": {
+          "append": false
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        -120
+      ],
+      "id": "c389c032-45f7-428b-8ef9-acbe56344bb7",
+      "name": "Read/Write Files from Disk2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "python",
+        "pythonCode": "import base64\n\n# Берём base64-строку из первого входящего элемента\nbase64_str = item['json']['data']\n# Декодируем строку base64\nimage_data = base64.b64decode(base64_str)\n\n# Возвращаем как бинарный объект\nreturn {\n    'binary': {\n        'data': {\n            'data': image_data,\n            'mimeType': 'image/png',\n            'fileName': 'generated.png'\n        }\n    }\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        -120
+      ],
+      "id": "ddf2787e-2aa0-4ea2-a1cf-4b8bd1f80856",
+      "name": "Code4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Ты — опытный визуальный режиссёр и художник концепт-артов. На основе фрагмента историко-мифологического текста тебе нужно создать детализированный кинематографический промт для генерации изображения с помощью нейросетей (DALL·E, Midjourney, Leonardo AI) для TikTok-ролика. Обязательно: 9:16, vertical frame, portrait layout\n\nРазбей следующий текст на 15–20 смысловых фрагментов, каждый из которых должен быть:\n\n– законченным по мысли (1–3 предложения);\n– подходящим для визуального сопровождения (1 изображение);\n– не длиннее 35–45 слов (чтобы поместилось в 4 секунды озвучки);\n- тепреь для э\\тих фрагментов нужно сгенерировать изображения. \n\nТвоя задача. Создать для каждого фрагмента уникальный промт, который я буду в дальнейшем использовать для генерации изображения. \n\n\nВАЖНО! изображения должны четко передавать сцену, о которой говориться в фрагменте. Чтобы на выходе, все сгенерированные в совокупности изображения четко подходили по смыслу полного текста повествования. \n- структура вывода:\n[{ \"index\": 1, \"text_promt\": \"...\" }, { \"index\": 2, \"text_promt\": \"...\" }]\n\n\n\n\n\nТекст:\n{{ $json.output }}\n\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        820,
+        0
+      ],
+      "id": "200ad814-6189-480c-bf21-8d85e3180fb9",
+      "name": "AI Agent5"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import json\n\n# Получаем строку JSON из поля 'output'\njson_string = items[0][\"json\"][\"output\"]\ncleaned = json_string.strip().strip(\"`\").replace(\"json\\n\", \"\").strip()\n\n# Преобразуем строку в Python-массив\nparsed = json.loads(cleaned)\n\n# Возвращаем каждый объект массива как отдельный item\nreturn [{\"json\": p} for p in parsed]\n\n\n# # Удаляем обёртку ```json\\n и ```\n# cleaned = json_string.strip(\"`\").strip()\n# cleaned = cleaned.replace(\"json\\n\", \"\").strip()\n\n# # Преобразуем строку в Python-массив\n# parsed = json.loads(cleaned)\n\n# # Возвращаем каждый объект массива как отдельный item\n# return [{\"json\": p} for p in parsed]\n\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        0
+      ],
+      "id": "9c6654ef-c5b4-44b6-868a-80a561379c72",
+      "name": "Code"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AI Agent5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Call hugginface inference api",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent5",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call hugginface inference api": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond with error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk2": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent5": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4a5f758c8f9630703668d06d430991b9c6805ececc8b1949050c44f19f7c0eb9"
+  }
+}
