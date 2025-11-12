@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/screenshots/cn8n-flow.jpg" alt="n8n-flow cover" width="100%">
+  <img src="n8n-flow.jpg" alt="n8n-flow cover" width="100%">
 </p>
 
 # 🎞️ AI-Powered Slideshow Video Creator (n8n Workflow)
